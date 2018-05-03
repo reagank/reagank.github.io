@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Introducing | My Dumb Robot</title>
+  <title>Electronics | My Dumb Robot</title>
   <meta name="author" content="Reagan Kelly">
   
-  <meta name="description" content="I’ve been building a robot for the last few weeks. It’s probably better to say that I’ve been planning for a few weeks and started building it this we">
+  <meta name="description" content="I want the robot to run on 12V so that I can drive the motor and all of the electronics with a single lead-acid battery. The Kinect already wants 12V,">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="generator" content="Hexo 2.6.0"/>
 
-  <meta property="og:title" content="Introducing"/>
+  <meta property="og:title" content="Electronics"/>
   <meta property="og:site_name" content="My Dumb Robot"/>
 
   
@@ -85,18 +85,18 @@
   
     
   
-    <h1 class="title">Introducing</h1>
+    <h1 class="title">Electronics</h1>
   
 
     <div class="post-date">
-      <time datetime="2018-04-29T02:34:42.000Z">2018-04-28</time>
+      <time datetime="2018-05-03T01:57:50.000Z">2018-05-02</time>
     </div>
   
   <div class="post-content">
     
-      <p>I’ve been building a robot for the last few weeks. It’s probably better to say that I’ve been planning for a few weeks and started building it this week. It’s not very complicated, and no one will mistake it for a professional piece of work, but it is starting to come together. I want to document some of the process here, and describe what I’m doing and why. This isn’t meant for a particular audience, and it may only be interesting to me, but I have stumbled across a few things while I’ve been starting, and it might be nice for that information to live in one place.</p>
-<h3 id="What-do-you-mean-by-a-robot"><a href="#What-do-you-mean-by-a-robot" class="headerlink" title="What do you mean by a robot?"></a>What do you mean by a robot?</h3><p>I’m making a rover-style wheeled ground vehicle. I want it to be able to move autonomously (as much as possible), and I want to be able to drive it remotely. I’m using a Kinect to provide vision and depth sensing, power wheels motors to provide propulsion, and a Raspberry Pi 3 to control everything. I’ve built a chassis out of a piece of plastic and slotted angle iron, and I’m going to use casters as front wheels. I’ve been lax about taking pictures of my progress, but I’ll try to record my progress photographically from here forward.</p>
-<h3 id="What-can-we-expect"><a href="#What-can-we-expect" class="headerlink" title="What can we expect?"></a>What can we expect?</h3><p>Sporadic posting, likely. I’ve never been good about keeping to a schedule, and don’t have a set time frame to finish this project. I’m interested in all sides of this - building and assembling the robot, wiring everything, and writing the software to operate it. I’ll try to cover all of those things here.</p>
+      <p>I want the robot to run on 12V so that I can drive the motor and all of the electronics with a single lead-acid battery. The Kinect already wants 12V, but the Raspberry Pi needs 5V. Here’s what I’ve come up with: Power comes from a UB1270 12VDC 7Ah sealed lead acid battery, which is split into 4 separate circuits - one each for the left and right motors, one for the Raspberry Pi, and one for the Kinect.</p>
+<p>The Raspberry Pi’s circuit goes to a 12V-5V step-down converter, which connects to the Pi. The Pi is also connected to the motor controllers via GPIO pins and the Kinect via USB. To protect the Pi I have a 2A fuse in the circuit just in case. The Kinect circuit connects to a 12V boost converter and then to the power cables of the Kinect adapter. I also have a 2A fuse in this circuit.<br><img src="/2018/05/02/Electronics/power-converters.jpg" width="600" height="900" title="The 12V Boost-up converter and 12V-5V Step-down converter"></p>
+<p>The last two circuits are identical, one each for the left and right motors. These connect to motor controllers, which are connected to the motors. Both circuits have a 35A fuse. The motors can draw substantially more, but the motor controllers can’t handle any more than that. Because the power wheels motors sddraw a lot of current, so typical hobby motor controllers like the L298N won’t work<a href="https://custom-build-robots.com/raspberry-pi-robot-cars/big-rob-motor-driver-bts7960b/8155?lang=en" target="_blank" rel="noopener">[1]</a>. I’m using two BTS7960 DC motor controllers, which I’m going to control with the Pi using the gpiozero Python library. That brings me to the software - I’m going to write some simple code to allow me to drive the robot using a bluetooth controller, and then more complex programs to allow it to drive autonomously. I’ll talk more about that next time.<br><img src="/2018/05/02/Electronics/motor-controller.jpg" width="600" height="900" title="The BTS7960 43A DC motor controller"></p>
 
     
   </div>
@@ -106,12 +106,12 @@
     
   
   <div class="tags">
-    <a href="/tags/planning/">planning</a>, <a href="/tags/overview/">overview</a>, <a href="/tags/introduction/">introduction</a>, <a href="/tags/robot/">robot</a>
+    <a href="/tags/overview/">overview</a>, <a href="/tags/electronics/">electronics</a>
   </div>
 
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/04/28/Introducing/" data-addthis-title="Introducing">
+addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/05/02/Electronics/" data-addthis-title="Electronics">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -122,11 +122,11 @@ addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/04/28/Intro
   
     <ul class="next_prev">
       
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2018/04/29/Body-and-Chassis/">
-          Next
+        <li class="prev">
+        <a class="btn btn-success" role="button" href="/2018/05/01/Kinect-Power-Adapter-Issues/">
+          Previous
         </a></li>
+      
       
     </ul>
   
