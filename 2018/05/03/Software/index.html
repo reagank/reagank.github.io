@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Electronics | My Dumb Robot</title>
+  <title>Software | My Dumb Robot</title>
   <meta name="author" content="Reagan Kelly">
   
-  <meta name="description" content="I want the robot to run on 12V so that I can drive the motor and all of the electronics with a single lead-acid battery. The Kinect already wants 12V,">
+  <meta name="description" content="I know I can’t write all of the software for the robot, but I want to do what I can. I want to make sure I understand how the system works, from how t">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="generator" content="Hexo 2.6.0"/>
 
-  <meta property="og:title" content="Electronics"/>
+  <meta property="og:title" content="Software"/>
   <meta property="og:site_name" content="My Dumb Robot"/>
 
   
@@ -85,18 +85,19 @@
   
     
   
-    <h1 class="title">Electronics</h1>
+    <h1 class="title">Software</h1>
   
 
     <div class="post-date">
-      <time datetime="2018-05-03T01:57:50.000Z">2018-05-02</time>
+      <time datetime="2018-05-03T23:55:32.000Z">2018-05-03</time>
     </div>
   
   <div class="post-content">
     
-      <p>I want the robot to run on 12V so that I can drive the motor and all of the electronics with a single lead-acid battery. The Kinect already wants 12V, but the Raspberry Pi needs 5V. Here’s what I’ve come up with: Power comes from a UB1270 12VDC 7Ah sealed lead acid battery, which is split into 4 separate circuits - one each for the left and right motors, one for the Raspberry Pi, and one for the Kinect.</p>
-<p>The Raspberry Pi’s circuit goes to a 12V-5V step-down converter, which connects to the Pi. The Pi is also connected to the motor controllers via GPIO pins and the Kinect via USB. To protect the Pi I have a 2A fuse in the circuit just in case. The Kinect circuit connects to a 12V boost converter and then to the power cables of the Kinect adapter. I also have a 2A fuse in this circuit.<br><img src="/2018/05/02/Electronics/power-converters.jpg" width="600" height="900" title="The 12V Boost-up converter and 12V-5V Step-down converter"></p>
-<p>The last two circuits are identical, one each for the left and right motors. These connect to motor controllers, which are connected to the motors. Both circuits have a 35A fuse. The motors can draw substantially more, but the motor controllers can’t handle any more than that. Because the power wheels motors sddraw a lot of current, so typical hobby motor controllers like the L298N won’t work<a href="https://custom-build-robots.com/raspberry-pi-robot-cars/big-rob-motor-driver-bts7960b/8155?lang=en" target="_blank" rel="noopener">[1]</a>. I’m using two BTS7960 DC motor controllers, which I’m going to control with the Pi using the gpiozero Python library. That brings me to the software - I’m going to write some simple code to allow me to drive the robot using a bluetooth controller, and then more complex programs to allow it to drive autonomously. I’ll talk more about that next time.<br><img src="/2018/05/02/Electronics/motor-controller.jpg" width="600" height="900" title="The BTS7960 43A DC motor controller"></p>
+      <p>I know I can’t write all of the software for the robot, but I want to do what I can. I want to make sure I understand how the system works, from how the motors are controlled to processing the depth and video from the Kinect. THe first stage is going to be controlling the motors. I have a bluetooth controller that I’ve paired with the Pi, and a little time mapping the joysticks gave me the input numbers to watch. </p>
+<p>The joysticks have two dimensions - horizonntal and vertical. The value is zero when the joystick is in the middle, and the extremes range from ~1280 to ~-1280 (there’s some wiggle room in the value). I have two motors, so I’m going to have the left joystick control the left motor and the right control the right. The motor controller uses PWM to control the motor speed, with one pin to control one direction and one pin to control the other. </p>
+<p>I’ll work out the percentage of the joystick position, and then use that value for the PWM. If the value is positive then the motor will spin forward, if its negative it’ll spin backward. It should be enough to have forward, stop, and reverse funcions in a motor class, instantiate the class for the left and right motors, and then drive it with the controller. To go forward, push forward on both sticks, to turn left push forward on the right stick, etc.</p>
+<p>I’m gaining on the construction, with only the casters left to mount. After that it just needs to be wired and it’ll be done. Next time I’ll talk about how the motors and wheels are mounted.</p>
 
     
   </div>
@@ -106,12 +107,12 @@
     
   
   <div class="tags">
-    <a href="/tags/overview/">overview</a>, <a href="/tags/electronics/">electronics</a>
+    <a href="/tags/development/">development</a>, <a href="/tags/Raspberry-Pi/">Raspberry Pi</a>
   </div>
 
   
   <div class="addthis_toolbox addthis_default_style 
-addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/05/02/Electronics/" data-addthis-title="Electronics">
+addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/05/03/Software/" data-addthis-title="Software">
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -123,15 +124,10 @@ addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/05/02/Elect
     <ul class="next_prev">
       
         <li class="prev">
-        <a class="btn btn-success" role="button" href="/2018/05/01/Kinect-Power-Adapter-Issues/">
+        <a class="btn btn-success" role="button" href="/2018/05/02/Electronics/">
           Previous
         </a></li>
       
-      
-        <li class="next">
-        <a class="btn btn-success" role="button" href="/2018/05/03/Software/">
-          Next
-        </a></li>
       
     </ul>
   

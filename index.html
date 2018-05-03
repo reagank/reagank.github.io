@@ -88,6 +88,47 @@
   
     
   
+    <h1 class="title"><a href="/2018/05/03/Software/">Software</a></h1>
+  
+
+    <div class="post-date">
+      <time datetime="2018-05-03T23:55:32.000Z">2018-05-03</time>
+    </div>
+  
+  <div class="post-content">
+    
+      <p>I know I can’t write all of the software for the robot, but I want to do what I can. I want to make sure I understand how the system works, from how the motors are controlled to processing the depth and video from the Kinect. THe first stage is going to be controlling the motors. I have a bluetooth controller that I’ve paired with the Pi, and a little time mapping the joysticks gave me the input numbers to watch. </p>
+<p>The joysticks have two dimensions - horizonntal and vertical. The value is zero when the joystick is in the middle, and the extremes range from ~1280 to ~-1280 (there’s some wiggle room in the value). I have two motors, so I’m going to have the left joystick control the left motor and the right control the right. The motor controller uses PWM to control the motor speed, with one pin to control one direction and one pin to control the other. </p>
+<p>I’ll work out the percentage of the joystick position, and then use that value for the PWM. If the value is positive then the motor will spin forward, if its negative it’ll spin backward. It should be enough to have forward, stop, and reverse funcions in a motor class, instantiate the class for the left and right motors, and then drive it with the controller. To go forward, push forward on both sticks, to turn left push forward on the right stick, etc.</p>
+<p>I’m gaining on the construction, with only the casters left to mount. After that it just needs to be wired and it’ll be done. Next time I’ll talk about how the motors and wheels are mounted.</p>
+
+    
+  </div>
+  
+      <div class="row">
+    
+    
+    </div>
+  
+  <div class="addthis_toolbox addthis_default_style 
+addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/05/03/Software/" data-addthis-title="Software">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+  
+  
+
+</article>
+
+						
+						<article class="post">
+  
+    
+  
     <h1 class="title"><a href="/2018/05/02/Electronics/">Electronics</a></h1>
   
 
@@ -271,6 +312,11 @@ addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/04/28/Intro
 <ul class="list-group">
 
   
+  <li class="list-group-item">
+    <span class="badge">1</span>
+    <a href="/tags/Raspberry-Pi/">Raspberry Pi</a>
+  </li>
+  
 
   
   <li class="list-group-item">
@@ -279,6 +325,11 @@ addthis_32x32_style" data-addthis-url="http://reagank.github.io/2018/04/28/Intro
   </li>
   
 
+  
+  <li class="list-group-item">
+    <span class="badge">1</span>
+    <a href="/tags/development/">development</a>
+  </li>
   
 
   
